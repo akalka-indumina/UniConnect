@@ -654,3 +654,181 @@ if (loginFormEl) {
     });
 }
 
+
+/* =========================
+   LECTURE LOGIN SYSTEM
+========================== */
+
+function setCurrentLecture(lecture) {
+    localStorage.setItem(
+        "uc_currentLecture",
+        JSON.stringify({ id: lecture.id, name: lecture.name, email: lecture.email })
+    );
+}
+
+function getCurrentLecture() {
+    const raw = localStorage.getItem("uc_currentLecture");
+    return raw ? JSON.parse(raw) : null;
+}
+
+function clearCurrentLecture() {
+    localStorage.removeItem("uc_currentLecture");
+    localStorage.removeItem("uc_lectureCourses");
+}
+
+function showLectureDashboard(lecture) {
+    homePage.style.display = "none";
+    appContainer.style.display = "";
+
+    document.getElementById("lectureNameDisplay").textContent = lecture.name;
+
+    showPage("lectureDashboard");
+
+    document.querySelectorAll(".menu a").forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    loadLectureCourses();
+}
+
+// Lecture Login Button Handlers
+document.getElementById("homeLectureLoginButton")
+    .addEventListener("click", function() {
+        openAuthModal(document.getElementById("lectureLoginModal"));
+    });
+
+// Lecture Login Form Handler
+const lectureLoginFormEl = document.getElementById("lectureLoginForm");
+if (lectureLoginFormEl) {
+    lectureLoginFormEl.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("lectureEmail").value.trim();
+
+        const password =
+            document.getElementById("lecturePassword").value;
+
+        if (!email || !password) {
+            showToast("Please enter your email and password");
+            return;
+        }
+
+        // POST to lecture_login.php
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+
+        fetch("lecture_login.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.json())
+            .then(resp => {
+                if (resp.success) {
+                    const lecture = { id: resp.lecture.id, name: resp.lecture.name, email: resp.lecture.email };
+                    setCurrentLecture(lecture);
+                    lectureLoginFormEl.reset();
+                    closeAuthModal("lectureLoginModal");
+                    showToast("Login successful!");
+                    showLectureDashboard(lecture);
+                } else {
+                    showToast(resp.message || "Invalid email or password");
+                }
+            })
+            .catch(err => {
+                showToast("Network error. Please try again.");
+            });
+
+    });
+}
+
+// Add Course Modal
+function openCourseModal() {
+    openModal(
+        "Add New Course",
+        "<form id='courseForm'><label class='field'><span>Course Code</span><input type='text' id='courseCode' placeholder='e.g., IIC 2223' required /></label><label class='field'><span>Course Name</span><input type='text' id='courseName' placeholder='e.g., Web Development' required /></label><label class='field'><span>Time</span><input type='text' id='courseTime' placeholder='e.g., Monday 10:00 AM' required /></label><button type='button' class='primary-button' onclick='saveCourse()'>Add Course</button></form>"
+    );
+}
+
+// Save Course to localStorage
+function saveCourse() {
+    const code = document.getElementById("courseCode").value.trim();
+    const name = document.getElementById("courseName").value.trim();
+    const time = document.getElementById("courseTime").value.trim();
+
+    if (!code || !name || !time) {
+        showToast("Please fill all fields");
+        return;
+    }
+
+    let courses = JSON.parse(localStorage.getItem("uc_lectureCourses")) || [];
+    
+    const course = {
+        id: courses.length + 1,
+        code: code,
+        name: name,
+        time: time,
+        progress: 0
+    };
+
+    courses.push(course);
+    localStorage.setItem("uc_lectureCourses", JSON.stringify(courses));
+
+    closeModal();
+    showToast("Course added successfully!");
+    loadLectureCourses();
+}
+
+// Load and Display Lecture Courses
+function loadLectureCourses() {
+    const courses = JSON.parse(localStorage.getItem("uc_lectureCourses")) || [];
+    const container = document.getElementById("lectureCoursesContainer");
+
+    if (courses.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #748096; padding: 40px 20px;">No courses yet. Click "Add Course" to create your first course.</p>';
+        return;
+    }
+
+    let html = '';
+    courses.forEach(function(course) {
+        html += `
+            <div class="course" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 12px;">
+                <div class="course-code" style="min-width: 60px;">
+                    ${course.code.split(' ')[0]}<br>
+                    ${course.code.split(' ')[1] || ''}
+                </div>
+                <div class="course-info" style="flex: 1; margin-left: 20px;">
+                    <h3 style="margin: 0; font-size: 18px; color: #1f2937;">${course.name}</h3>
+                    <p style="margin: 5px 0; color: #748096; font-size: 14px;">${course.time}</p>
+                </div>
+                <button onclick="deleteCourse(${course.id})" style="padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+// Delete Course
+function deleteCourse(courseId) {
+    if (confirm("Are you sure you want to delete this course?")) {
+        let courses = JSON.parse(localStorage.getItem("uc_lectureCourses")) || [];
+        courses = courses.filter(c => c.id !== courseId);
+        localStorage.setItem("uc_lectureCourses", JSON.stringify(courses));
+        showToast("Course deleted successfully!");
+        loadLectureCourses();
+    }
+}
+
+// Lecture Logout (from dropdown menu)
+function handleLectureLogout() {
+    closeUserDropdown();
+    clearCurrentLecture();
+    showHome();
+    showToast("You have been logged out");
+}
+
