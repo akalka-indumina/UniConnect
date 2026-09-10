@@ -47,7 +47,11 @@
         <div class="home-nav-actions">
 
             <button class="ghost-button" id="homeLoginButton">
-                Login
+                Student Login
+            </button>
+
+            <button class="ghost-button" id="homeLectureLoginButton">
+                Lecture Login
             </button>
 
             <button class="primary-button" id="homeGetStartedButton">
@@ -1038,6 +1042,62 @@
         </section>
 
 
+        <!-- =========================
+             LECTURE DASHBOARD PAGE
+        ========================== -->
+
+        <section class="content page" id="lectureDashboard" style="display:none">
+
+            <div class="hero">
+
+                <div>
+
+                    <span class="eyebrow">
+                        LECTURE DASHBOARD
+                    </span>
+
+                    <h1>
+                        Welcome, <span id="lectureNameDisplay">Lecture</span>! 👨‍🏫
+                    </h1>
+
+                    <p>
+                        Manage your courses and students.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+
+                <div>
+
+                    <span class="eyebrow">
+                        MY COURSES
+                    </span>
+
+                    <h2>
+                        Your Teaching Courses
+                    </h2>
+
+                </div>
+
+                <button class="primary-button" id="addCourseBtn" onclick="openCourseModal()">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Course
+                </button>
+
+            </div>
+
+            <div class="list" id="lectureCoursesContainer">
+                <p style="text-align: center; color: #748096; padding: 40px 20px;">
+                    No courses yet. Click "Add Course" to create your first course.
+                </p>
+            </div>
+
+        </section>
+
+
         <!-- FOOTER -->
 
         <footer>
@@ -1286,6 +1346,85 @@
             Already have an account?
 
             <a href="#" id="switchToLogin">Login</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     LECTURE LOGIN MODAL
+========================== -->
+
+<div class="modal-background" id="lectureLoginModal">
+
+    <div class="modal">
+
+        <button
+            class="close"
+            onclick="closeAuthModal('lectureLoginModal')"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-chalkboard-user"></i>
+
+        </div>
+
+
+        <h2>Lecture Login</h2>
+
+        <p>Log in to access your lecture dashboard.</p>
+
+
+        <form class="auth-form" id="lectureLoginForm">
+
+            <label class="field">
+
+                <span>Email</span>
+
+                <input
+                    type="email"
+                    id="lectureEmail"
+                    placeholder="your@email.com"
+                    required
+                >
+
+            </label>
+
+
+            <label class="field">
+
+                <span>Password</span>
+
+                <input
+                    type="password"
+                    id="lecturePassword"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </label>
+
+
+            <button type="submit" class="primary-button auth-submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="auth-switch">
+
+            Back to <a href="#" id="backToHome" onclick="closeAuthModal('lectureLoginModal'); return false;">home</a>
 
         </p>
 

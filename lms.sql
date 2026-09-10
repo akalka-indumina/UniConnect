@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2026 at 05:26 PM
+-- Generation Time: Sep 10, 2026 at 06:02 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `lms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture`
+--
+
+CREATE TABLE `lecture` (
+  `lecture_id` int(11) NOT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `lecture`
+--
+
+INSERT INTO `lecture` (`lecture_id`, `fullname`, `email`, `password`, `created_at`) VALUES
+(1, 'Dr. Samantha Perera', 'samantha.perera@lms.edu', 'password123', '2026-09-10 15:55:29'),
+(2, 'Prof. Kamal Wickramasinghe', 'kamal.w@lms.edu', 'securePass456', '2026-09-10 15:55:29'),
+(3, 'Ms. Dilini Fernando', 'dilini.fernando@lms.edu', 'lecture789', '2026-09-10 15:55:29');
 
 -- --------------------------------------------------------
 
@@ -53,6 +76,13 @@ INSERT INTO `student` (`id`, `fullname`, `email`, `username`, `password`, `creat
 --
 
 --
+-- Indexes for table `lecture`
+--
+ALTER TABLE `lecture`
+  ADD PRIMARY KEY (`lecture_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -63,6 +93,12 @@ ALTER TABLE `student`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `lecture`
+--
+ALTER TABLE `lecture`
+  MODIFY `lecture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student`
