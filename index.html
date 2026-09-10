@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UniConnect | Student Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<!-- =========================
+     HOME / LANDING PAGE
+========================== -->
+
+<div class="home-page" id="homePage">
+
+    <nav class="home-nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <strong>UniConnect</strong>
+                <small>Student Portal</small>
+            </div>
+
+        </div>
+
+
+        <div class="home-nav-actions">
+
+            <button class="ghost-button" id="homeLoginButton">
+                Login
+            </button>
+
+            <button class="primary-button" id="homeGetStartedButton">
+                Get Started
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <section class="home-hero">
+
+        <span class="eyebrow">
+            STUDENT SERVICE PORTAL
+        </span>
+
+        <h1>
+            Everything you need for university life, in one place.
+        </h1>
+
+        <p>
+            Courses, events, notices and campus services — all in a single dashboard built for students.
+        </p>
+
+        <div class="home-hero-actions">
+
+            <button class="primary-button" id="heroGetStartedButton">
+                <i class="fa-solid fa-rocket"></i>
+                Get Started
+            </button>
+
+            <button class="ghost-button" id="heroLoginButton">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="home-features">
+
+        <div class="home-feature">
+
+            <div class="service-icon purple">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+
+            <h3>Library</h3>
+
+            <p>Search books, journals and digital resources.</p>
+
+        </div>
+
+
+        <div class="home-feature">
+
+            <div class="service-icon blue">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+
+            <h3>Events</h3>
+
+            <p>Stay updated on everything happening on campus.</p>
+
+        </div>
+
+
+        <div class="home-feature">
+
+            <div class="service-icon orange">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+
+            <h3>Notices</h3>
+
+            <p>Never miss an important university announcement.</p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<div class="app" id="appContainer" style="display:none">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <strong>UniConnect</strong>
+                <small>Student Portal</small>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="#dashboard" class="active" data-page="dashboard">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </a>
+
+            <a href="#courses" data-page="courses">
+                <i class="fa-solid fa-book-open"></i>
+                Courses
+            </a>
+
+            <a href="#events" data-page="events">
+                <i class="fa-solid fa-calendar-days"></i>
+                Events
+            </a>
+
+            <a href="#notices" data-page="notices">
+                <i class="fa-solid fa-bullhorn"></i>
+                Notices
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="theme-button" id="themeButton">
+
+                <i class="fa-solid fa-moon"></i>
+
+                <span>Dark mode</span>
+
+            </button>
+
+            <a href="#contact" class="theme-button">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                Help & Contact
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main>
+
+
+        <!-- TOP BAR -->
+
+        <header>
+
+            <button class="mobile-menu" id="menuButton">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <label class="search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search courses, events, notices..."
+                >
+
+            </label>
+
+
+            <div class="actions">
+
+                <button
+                    class="icon-button"
+                    onclick="showToast('You have 3 new notifications')"
+                >
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <b class="notification-dot"></b>
+
+                </button>
+
+
+                <div class="user-menu">
+
+                    <div class="user" id="userMenuButton">
+
+                        <div class="avatar" id="userAvatar">
+                            ST
+                        </div>
+
+                        <div>
+
+                            <strong id="userName">Student</strong>
+
+                            <small>Undergraduate</small>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:#748096;margin-left:2px;"></i>
+
+                    </div>
+
+
+                    <div class="user-dropdown" id="userDropdown">
+
+                        <button onclick="handleProfileClick()">
+                            <i class="fa-solid fa-id-badge"></i>
+                            Profile
+                        </button>
+
+                        <button onclick="handleLogout()">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- PAGE CONTENT -->
+
+        <section class="content page" id="dashboard">
+
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div>
+
+                    <span class="eyebrow">
+                        STUDENT DASHBOARD
+                    </span>
+
+                    <h1>
+                        Good morning, Student! 👋
+                    </h1>
+
+                    <p>
+                        Everything you need for university life, in one place.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon purple">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>My Courses</span>
+
+                        <strong>06</strong>
+
+                        <small>
+                            2 assignments due
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>Upcoming Events</span>
+
+                        <strong>04</strong>
+
+                        <small>
+                            Next: Tech Meetup
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>New Notices</span>
+
+                        <strong>08</strong>
+
+                        <small>
+                            3 posted today
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>Attendance</span>
+
+                        <strong>92%</strong>
+
+                        <small>
+                            Excellent progress
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SERVICES -->
+
+            <div class="section-title" id="services">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ESSENTIAL SERVICES
+                    </span>
+
+                    <h2>
+                        What do you need?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="services">
+
+
+                <article
+                    class="service"
+                    data-search="library books study"
+                >
+
+                    <div class="service-icon purple">
+
+                        <i class="fa-solid fa-book-open-reader"></i>
+
+                    </div>
+
+                    <h3>
+                        University Library
+                    </h3>
+
+                    <p>
+                        Search books, journals and digital resources.
+                    </p>
+
+                    <button
+                        onclick="openModal(
+                        'University Library',
+                        'Library is open from 8:00 AM to 8:00 PM. You can reserve books and access digital resources.'
+                        )"
+                    >
+
+                        Explore
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+
+                <article
+                    class="service"
+                    data-search="student affairs registration welfare"
+                >
+
+                    <div class="service-icon blue">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                    <h3>
+                        Student Affairs
+                    </h3>
+
+                    <p>
+                        Registration, welfare and student support services.
+                    </p>
+
+                    <button
+                        onclick="openModal(
+                        'Student Affairs',
+                        'Get help with registration, student records, welfare services and general student matters.'
+                        )"
+                    >
+
+                        Get Help
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+
+                <article
+                    class="service"
+                    data-search="IT support wifi computer password"
+                >
+
+                    <div class="service-icon orange">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <h3>
+                        IT Support
+                    </h3>
+
+                    <p>
+                        Get help with Wi-Fi, LMS and technical problems.
+                    </p>
+
+                    <button
+                        onclick="openModal(
+                        'IT Support',
+                        'Report Wi-Fi, LMS, password and computer problems to the university IT Help Desk.'
+                        )"
+                    >
+
+                        Report Issue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+
+                <article
+                    class="service"
+                    data-search="career jobs internship CV"
+                >
+
+                    <div class="service-icon green">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <h3>
+                        Career Centre
+                    </h3>
+
+                    <p>
+                        Find internships, jobs and career development programs.
+                    </p>
+
+                    <button
+                        onclick="openModal(
+                        'Career Centre',
+                        'Explore internships, career guidance, CV workshops and employer events.'
+                        )"
+                    >
+
+                        Explore Jobs
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div class="contact" id="contact">
+
+                <div>
+
+                    <span class="eyebrow">
+                        NEED ASSISTANCE?
+                    </span>
+
+                    <h2>
+                        We are here to help.
+                    </h2>
+
+                    <p>
+                        Can't find what you need?
+                        Contact the student support team.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="openModal(
+                    'Student Support',
+                    'Email: support@uniconnect.edu<br>Phone: +94 11 000 0000<br>Office: Student Centre, Ground Floor'
+                    )"
+                >
+
+                    Contact Support
+
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             COURSES PAGE
+        ========================== -->
+
+        <section class="content page" id="courses" style="display:none">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACADEMICS
+                    </span>
+
+                    <h2>
+                        My Courses
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="list">
+
+
+                <div
+                    class="course"
+                    data-search="web application development IIC 2223"
+                >
+
+                    <div class="course-code">
+
+                        IIC
+                        <br>
+                        2223
+
+                    </div>
+
+
+                    <div class="course-info">
+
+                        <h3>
+                            Web Application Development
+                        </h3>
+
+                        <p>
+                            Monday • 10:00 AM
+                        </p>
+
+                        <div class="progress">
+
+                            <span style="width:78%"></span>
+
+                        </div>
+
+                        <small>
+                            78% completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="course"
+                    data-search="database management IIC 2212"
+                >
+
+                    <div class="course-code">
+
+                        IIC
+                        <br>
+                        2212
+
+                    </div>
+
+
+                    <div class="course-info">
+
+                        <h3>
+                            Database Management
+                        </h3>
+
+                        <p>
+                            Wednesday • 1:00 PM
+                        </p>
+
+                        <div class="progress">
+
+                            <span style="width:64%"></span>
+
+                        </div>
+
+                        <small>
+                            64% completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="course"
+                    data-search="software engineering IIC 2233"
+                >
+
+                    <div class="course-code">
+
+                        IIC
+                        <br>
+                        2233
+
+                    </div>
+
+
+                    <div class="course-info">
+
+                        <h3>
+                            Software Engineering
+                        </h3>
+
+                        <p>
+                            Thursday • 9:00 AM
+                        </p>
+
+                        <div class="progress">
+
+                            <span style="width:86%"></span>
+
+                        </div>
+
+                        <small>
+                            86% completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             EVENTS PAGE
+        ========================== -->
+
+        <section class="content page" id="events" style="display:none">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        CAMPUS LIFE
+                    </span>
+
+                    <h2>
+                        Upcoming Events
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="list">
+
+
+                <div
+                    class="event"
+                    data-search="technology meetup tech event"
+                >
+
+                    <div class="date">
+
+                        <b>12</b>
+
+                        <span>SEP</span>
+
+                    </div>
+
+
+                    <div class="event-info">
+
+                        <h3>
+                            Technology Meetup 2026
+                        </h3>
+
+                        <p>
+                            Main Auditorium • 2:00 PM
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        onclick="showToast('Event added to calendar!')"
+                    >
+
+                        <i class="fa-regular fa-calendar-plus"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                    class="event"
+                    data-search="sports event"
+                >
+
+                    <div class="date">
+
+                        <b>18</b>
+
+                        <span>SEP</span>
+
+                    </div>
+
+
+                    <div class="event-info">
+
+                        <h3>
+                            Inter-University Sports
+                        </h3>
+
+                        <p>
+                            University Ground • 9:00 AM
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        onclick="showToast('Event added to calendar!')"
+                    >
+
+                        <i class="fa-regular fa-calendar-plus"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                    class="event"
+                    data-search="career internship fair"
+                >
+
+                    <div class="date">
+
+                        <b>25</b>
+
+                        <span>SEP</span>
+
+                    </div>
+
+
+                    <div class="event-info">
+
+                        <h3>
+                            Career & Internship Fair
+                        </h3>
+
+                        <p>
+                            Student Centre • 10:00 AM
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        onclick="showToast('Event added to calendar!')"
+                    >
+
+                        <i class="fa-regular fa-calendar-plus"></i>
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             NOTICES PAGE
+        ========================== -->
+
+        <section class="content page" id="notices" style="display:none">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        LATEST UPDATES
+                    </span>
+
+                    <h2>
+                        University Notices
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="notices">
+
+
+                <article
+                    class="notice"
+                    data-search="exam timetable academic"
+                >
+
+                    <span class="tag academic">
+                        ACADEMIC
+                    </span>
+
+                    <h3>
+                        Semester examination timetable released
+                    </h3>
+
+                    <p>
+                        The examination timetable for the upcoming semester is now available.
+                    </p>
+
+                    <small>
+                        2 hours ago
+                    </small>
+
+                </article>
+
+
+
+                <article
+                    class="notice"
+                    data-search="innovation challenge event"
+                >
+
+                    <span class="tag event-tag">
+                        EVENT
+                    </span>
+
+                    <h3>
+                        Student innovation challenge applications open
+                    </h3>
+
+                    <p>
+                        Register your team and present an innovative solution to a real-world problem.
+                    </p>
+
+                    <small>
+                        Yesterday
+                    </small>
+
+                </article>
+
+
+
+                <article
+                    class="notice"
+                    data-search="library opening hours general"
+                >
+
+                    <span class="tag general">
+                        GENERAL
+                    </span>
+
+                    <h3>
+                        Library extended opening hours
+                    </h3>
+
+                    <p>
+                        Extended study hours are available during the examination preparation period.
+                    </p>
+
+                    <small>
+                        2 days ago
+                    </small>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                © 2026 UniConnect Student Service Portal
+            </span>
+
+            <span>
+                IIC 2223 • Web Application Development
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================
+     MODAL
+========================== -->
+
+<div class="modal-background" id="modal">
+
+    <div class="modal">
+
+        <button
+            class="close"
+            onclick="closeModal()"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalText"></p>
+
+
+        <button
+            class="primary-button"
+            onclick="closeModal()"
+        >
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     LOGIN MODAL
+========================== -->
+
+<div class="modal-background" id="loginModal">
+
+    <div class="modal">
+
+        <button
+            class="close"
+            onclick="closeAuthModal('loginModal')"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+        </div>
+
+
+        <h2>Welcome back</h2>
+
+        <p>Log in to access your dashboard.</p>
+
+
+        <form class="auth-form" id="loginForm">
+
+            <label class="field">
+
+                <span>Email</span>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </label>
+
+
+            <label class="field">
+
+                <span>Password</span>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </label>
+
+
+            <button type="submit" class="primary-button auth-submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="auth-switch">
+
+            Don't have an account?
+
+            <a href="#" id="switchToSignup">Sign up</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     SIGNUP MODAL
+========================== -->
+
+<div class="modal-background" id="signupModal">
+
+    <div class="modal">
+
+        <button
+            class="close"
+            onclick="closeAuthModal('signupModal')"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+        </div>
+
+
+        <h2>Create your account</h2>
+
+        <p>Sign up to get started with UniConnect.</p>
+
+
+        <form class="auth-form" id="signupForm">
+
+            <label class="field">
+
+                <span>Full Name</span>
+
+                <input
+                    type="text"
+                    id="signupName"
+                    placeholder="Your full name"
+                    required
+                >
+
+            </label>
+
+
+            <label class="field">
+
+                <span>Email</span>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </label>
+
+
+            <label class="field">
+
+                <span>Password</span>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required
+                >
+
+            </label>
+
+
+            <label class="field">
+
+                <span>Confirm Password</span>
+
+                <input
+                    type="password"
+                    id="signupConfirmPassword"
+                    placeholder="Re-enter your password"
+                    minlength="6"
+                    required
+                >
+
+            </label>
+
+
+            <button type="submit" class="primary-button auth-submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="auth-switch">
+
+            Already have an account?
+
+            <a href="#" id="switchToLogin">Login</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
